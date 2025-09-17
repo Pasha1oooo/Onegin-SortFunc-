@@ -15,7 +15,6 @@ int          max(int a, int b);
 int          min(int a, int b);
 int          GetLine(char ** lineptr, FILE * stream);
 
-
 int StrCmp(char * str1,char * str2) {
     int j = 0;
     while((str1[j] != '\0') || (str2[j] != '\0')) {

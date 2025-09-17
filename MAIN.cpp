@@ -29,7 +29,6 @@ char ** ReadText(FILE * file){
     size_t n = 10;
     int    a = 0;
     int    i = 0;
-
     char ** ptr = (char**)calloc(n, sizeof(char*));
     while(a != 1){
         if((size_t)i == n){
