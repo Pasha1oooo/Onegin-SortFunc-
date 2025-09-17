@@ -1,0 +1,4 @@
+*.o
+MAIN
+run.sh
+gitignore
