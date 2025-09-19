@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['sortbyend_0',['SortByEnd',['../MAIN_8cpp.html#ad0d16360b10ddbfcdb2314e58fb29df8',1,'MAIN.cpp']]],
-  ['sortnoreg_1',['SortNoReg',['../MAIN_8cpp.html#afaf95e710d991b69a24749f509e9459a',1,'MAIN.cpp']]],
+  ['sortbyend_0',['SortByEnd',['../MAIN_8cpp.html#a6cb4d619bb9f686b65b6acb3a6e53bfa',1,'MAIN.cpp']]],
+  ['sortnoreg_1',['SortNoReg',['../MAIN_8cpp.html#ae26601eff6315acce486f7f22b6d0e4d',1,'MAIN.cpp']]],
   ['strcat_2',['StrCat',['../BasicFuncs_8cpp.html#a4d31ffea258350e0216607934db44d2e',1,'StrCat(char *dst, const char *src):&#160;BasicFuncs.cpp'],['../Hedder_8h.html#a68a8cf13d6356b8d1cdcdc138b73afd1',1,'StrCat(char *str1, const char *str2):&#160;BasicFuncs.cpp']]],
   ['strchr_3',['StrChr',['../BasicFuncs_8cpp.html#a17afa945521714fc980c5cfebdf1695f',1,'StrChr(const char *str1, int c):&#160;BasicFuncs.cpp'],['../Hedder_8h.html#a17afa945521714fc980c5cfebdf1695f',1,'StrChr(const char *str1, int c):&#160;BasicFuncs.cpp']]],
   ['strcmp_4',['StrCmp',['../BasicFuncs_8cpp.html#ab78deadff0519ab0297970b87f84f937',1,'StrCmp(char *str1, char *str2):&#160;BasicFuncs.cpp'],['../Hedder_8h.html#ab78deadff0519ab0297970b87f84f937',1,'StrCmp(char *str1, char *str2):&#160;BasicFuncs.cpp']]],

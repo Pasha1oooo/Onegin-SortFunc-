@@ -21,80 +21,73 @@ int     comp(const void * a, const void * b);
 bool    ComparisonStr(const char * str1, const char * str2);
 FLAGS   FindInFlagBase(int argc, const char * argv[],FILE ** file);
 void    PrintHelp(void);
-void    DefaultSort(FILE * fin);
-void    SortByEnd(FILE * fin);
-void    SortNoReg(FILE * fin);
-void    Qsort(FILE * fin);
+void    DefaultSort(char *** Text);
+void    SortByEnd(char *** Text);
+void    SortNoReg(char *** Text);
+void    Qsort(char *** Text);
 
 
 int main(int argc, const char * argv[]){
     printf("Meow\n");
 
-    FILE * fin2 = fopen("POLTORASHKA.txt", "r");
     FILE * file = NULL;
+    FLAGS mode = FindInFlagBase(argc, argv, &file);
 
-    switch(FindInFlagBase(argc, argv, &file)){
-    case MODE_kit:
-    {
+    if(mode == MODE_kit){
+        FILE * fin2 = fopen("POLTORASHKA.txt", "r");
         fseek(fin2, 0, SEEK_END);
         size_t n = (long unsigned int)ftell(fin2);
         fseek(fin2, 0, SEEK_SET);
         for (int i=0; i<(int)n; i++){ // no magic numbers
             putchar(getc(fin2)); // sendfile maybe
         }
+        fclose(fin2);
         return 0;
     }
-    case MODE_ByEnd:
-        MyAssert(file == NULL);
-        SortByEnd(file);
-        return 0;
-    case MODE_NoReg:
-        MyAssert(file == NULL);
-        SortNoReg(file);
-        return 0;
-    case MODE_Qsort:
-        MyAssert(file == NULL);
-        Qsort(file);
-        return 0;
-    case MODE_Help:
+    else if(mode == MODE_Help){
         PrintHelp();
         return 0;
+    }
+
+    MyAssert(file == NULL);
+    char ** Text = ReadText(file);
+
+    switch(mode){
+    case MODE_ByEnd:
+        MyAssert(file == NULL);
+        SortByEnd(&Text);
+        break;
+    case MODE_NoReg:
+        MyAssert(file == NULL);
+        SortNoReg(&Text);
+        break;
+    case MODE_Qsort:
+        MyAssert(file == NULL);
+        Qsort(&Text);
+        break;
     case MODE_Default:
     default :
         MyAssert(file == NULL);
-        DefaultSort(file);
-        return 0;
+        DefaultSort(&Text);
+        break;
     }
+
+    PrintText(Text);
     fclose(file);
-    fclose(fin2);
 
     return 0;
 
 }
-void Qsort(FILE * fin){
-    char ** Text = ReadText(fin);
+void Qsort(char *** Text){
     qsort(Text, 6640, sizeof(char*), comp);
-    PrintText(Text);
-    for(int i = 0; Text[i] != NULL; i++){
-        free(Text[i]);
-    }
-    free(Text);
-}
-void DefaultSort(FILE * fin){
-    char ** Text = ReadText(fin);
-    TextSort(&Text);
-    PrintText(Text);
 
     for(int i = 0; Text[i] != NULL; i++){
         free(Text[i]);
     }
     free(Text);
 }
-
-void SortByEnd(FILE * fin){
-    char ** Text = ReadText(fin);
-    TextISort(&Text);
-    PrintText(Text);
+void DefaultSort(char *** Text){
+    TextSort(Text);
 
     for(int i = 0; Text[i] != NULL; i++){
         free(Text[i]);
@@ -102,10 +95,18 @@ void SortByEnd(FILE * fin){
     free(Text);
 }
 
-void SortNoReg(FILE * fin){
-    char ** Text = ReadText(fin);
-    TextSortNReg(&Text);
-    PrintText(Text);
+void SortByEnd(char *** Text){
+
+    TextISort(Text);
+
+    for(int i = 0; Text[i] != NULL; i++){
+        free(Text[i]);
+    }
+    free(Text);
+}
+
+void SortNoReg(char *** Text){
+    TextSortNReg(Text);
 
     for(int i = 0; Text[i] != NULL; i++){
         free(Text[i]);
