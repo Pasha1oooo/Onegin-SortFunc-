@@ -5,7 +5,7 @@
 
 int StrCmp(char * str1,char * str2) {
     int j = 0;
-    while((str1[j] != '\0') || (str2[j] != '\0') || (str1[j] != '\n') || (str2[j] != '\n')) {
+    while((str1[j] != '\0') || (str2[j] != '\0')) {
         if (str1[j] != str2[j]) {
             if((StrLen(str1)-StrLen(str2)) != 0){
                 return (StrLen(str1)-StrLen(str2));
