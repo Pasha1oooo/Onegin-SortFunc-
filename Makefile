@@ -20,9 +20,9 @@ run: MAIN
 MAIN: MAIN.o BasicFuncs.o
 	@g++ ${CXXFLAGS} MAIN.o BasicFuncs.o -o MAIN
 
-BasicFuncs.o: BasicFuncs.cpp
+BasicFuncs.o: BasicFuncs.cpp Hedder.h
 	@g++ ${CXXFLAGS} -c BasicFuncs.cpp -o BasicFuncs.o
 
-MAIN.o: MAIN.cpp
+MAIN.o: MAIN.cpp MyAssert.h COLORS.h
 	@g++ ${CXXFLAGS} -c MAIN.cpp -o MAIN.o
 

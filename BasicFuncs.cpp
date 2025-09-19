@@ -98,21 +98,21 @@ char * StrDup(const char * str){
 
 int GetLine(char ** lineptr, FILE * stream){
     size_t n = 10;
-    int i = 0;
+    int    i = 0;
+
     char * ptr = (char*)calloc(n, sizeof(char));
     *(ptr + n-1) = '\0';
     char c = (char)getc(stream);
     while(c != '\n' && c != EOF){
         if((size_t)i == n-1){
             n = n * 2;
-            ptr = (char*)realloc(ptr,n);              //?????????????// 0 00 000 0000
+            ptr = (char*)realloc(ptr,n);
             *(ptr + n-1) = '\0';
         }
         *(ptr + i) = c;
         c = (char)getc(stream);
         i++;
     }
-
     *lineptr = (char*)realloc(ptr,n * sizeof(char));
     *(*(lineptr)+i) = '\0';
     if(c == EOF){
