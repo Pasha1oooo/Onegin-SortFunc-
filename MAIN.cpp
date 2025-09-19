@@ -17,20 +17,21 @@ void    TextSortNReg(char *** text);
 
 void    TextEraseChars(char *** text, const char * chars);
 void    SwapStr(char *** text, int n1, int n2);
-//int   comp(void ** a, void ** b);
+int     comp(const void * a, const void * b);
 bool    ComparisonStr(const char * str1, const char * str2);
 FLAGS   FindInFlagBase(int argc, const char * argv[],FILE ** file);
 void    PrintHelp(void);
 void    DefaultSort(FILE * fin);
 void    SortByEnd(FILE * fin);
 void    SortNoReg(FILE * fin);
+void    Qsort(FILE * fin);
 
 
 int main(int argc, const char * argv[]){
     printf("Meow\n");
 
     FILE * fin2 = fopen("POLTORASHKA.txt", "r");
-    FILE *  file = NULL;
+    FILE * file = NULL;
 
     switch(FindInFlagBase(argc, argv, &file)){
     case MODE_kit:
@@ -51,6 +52,10 @@ int main(int argc, const char * argv[]){
         MyAssert(file == NULL);
         SortNoReg(file);
         return 0;
+    case MODE_Qsort:
+        MyAssert(file == NULL);
+        Qsort(file);
+        return 0;
     case MODE_Help:
         PrintHelp();
         return 0;
@@ -66,7 +71,15 @@ int main(int argc, const char * argv[]){
     return 0;
 
 }
-
+void Qsort(FILE * fin){
+    char ** Text = ReadText(fin);
+    qsort(Text, 6640, sizeof(char*), comp);
+    PrintText(Text);
+    for(int i = 0; Text[i] != NULL; i++){
+        free(Text[i]);
+    }
+    free(Text);
+}
 void DefaultSort(FILE * fin){
     char ** Text = ReadText(fin);
     TextSort(&Text);
@@ -284,32 +297,27 @@ char ** ReadText2(FILE * fin, char ** a){
     ptr[sum] = NULL;
     return ptr;
 }
-/*
-int comp(void **a, void **b) {
-    for(int n = 0; n < min(StrLen((char *)a), StrLen((char *)b)); n++){
-        if(*((char *)a+n) - *((char *)b+n) > 0){
-            return 1;
-        }
-        else{
-            return 0;
-        }
-    }
-    return 0;
+
+int comp(const void * a, const void * b) {
+    return strcmp(*(const char**)a, *(const char**)b);
 }
-*/
+
 
 FLAGS FindInFlagBase(int argc, const char * argv[], FILE ** file) {
     for(int i = 0; i < argc; i++) {
         if(ComparisonStr(argv[i],"-D")) {
             *file = fopen(argv[i + 1], "r");
+            MyAssert(file == NULL);
             return MODE_Default;
         }
         if(ComparisonStr(argv[i],"-BE")) {
             *file = fopen(argv[i + 1], "r");
+            MyAssert(file == NULL);
             return MODE_ByEnd;
         }
         if(ComparisonStr(argv[i],"-NR")) {
             *file = fopen(argv[i + 1], "r");
+            MyAssert(file == NULL);
             return MODE_NoReg;
         }
         if(ComparisonStr(argv[i],"--help")) {
@@ -317,6 +325,10 @@ FLAGS FindInFlagBase(int argc, const char * argv[], FILE ** file) {
         }
         if(ComparisonStr(argv[i],"--kitten")) {
             return MODE_kit;
+        }
+        if(ComparisonStr(argv[i],"-QS")) {
+            *file = fopen(argv[i + 1], "r");
+            return MODE_Qsort;
         }
     }
     return MODE_Default;

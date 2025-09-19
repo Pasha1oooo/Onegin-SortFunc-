@@ -8,7 +8,8 @@ typedef enum {
     MODE_ByEnd = 2,
     MODE_NoReg = 3,
     MODE_Help = 4,
-    MODE_kit = 5
+    MODE_Qsort = 5,
+    MODE_kit = 6
 } FLAGS;
 
 int          StrLen(const char * str1);
