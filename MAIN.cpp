@@ -5,6 +5,14 @@
 #include "Hedder.h"
 #include "MyAssert.h"
 
+typedef enum {
+    MODE_Default= 1,
+    MODE_ByEnd = 2,
+    MODE_NoReg = 3,
+    MODE_Help = 4,
+    MODE_Qsort = 5,
+    MODE_kit = 6
+} FLAGS;
 
 char ** ReadText(FILE * fin);
 char ** ReadText2(FILE * fin, char ** a);
@@ -25,7 +33,6 @@ void    DefaultSort(char *** Text);
 void    SortByEnd(char *** Text);
 void    SortNoReg(char *** Text);
 void    Qsort(char *** Text);
-
 
 int main(int argc, const char * argv[]){
     printf("Meow\n");

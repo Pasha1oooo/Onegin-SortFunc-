@@ -14,11 +14,11 @@ CXXFLAGS= -g -lm -D _DEBUG -ggdb3  -O0 -Wall -Wextra \
     -fsanitize=address,alignment,bool,bounds,enum,float-cast-overflow,float-divide-by-zero,integer-divide-by-zero,leak,nonnull-attribute,null,object-size,return,returns-nonnull-attribute,shift,signed-integer-overflow,undefined,unreachable,vla-bound,vptr
 all: MAIN
 
-MAIN: MAIN.o BasicFuncs.o
-	@g++ ${CXXFLAGS} MAIN.o BasicFuncs.o -o MAIN
+MAIN: MAIN.o BasicStrFuncs.o
+	@g++ ${CXXFLAGS} MAIN.o BasicStrFuncs.o -o MAIN
 
-BasicFuncs.o: BasicFuncs.cpp Hedder.h
-	@g++ ${CXXFLAGS} -c BasicFuncs.cpp -o BasicFuncs.o
+BasicStrFuncs.o: BasicStrFuncs.cpp Hedder.h
+	@g++ ${CXXFLAGS} -c BasicStrFuncs.cpp -o BasicStrFuncs.o
 
 MAIN.o: MAIN.cpp MyAssert.h COLORS.h
 	@g++ ${CXXFLAGS} -c MAIN.cpp -o MAIN.o

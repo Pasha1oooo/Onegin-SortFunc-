@@ -2,16 +2,6 @@
 #include <math.h>
 #include <stdlib.h>
 
-
-typedef enum {
-    MODE_Default= 1,
-    MODE_ByEnd = 2,
-    MODE_NoReg = 3,
-    MODE_Help = 4,
-    MODE_Qsort = 5,
-    MODE_kit = 6
-} FLAGS;
-
 int          StrLen(const char * str1);
 int          StrCmp(char * str1, char * str2);
 char *       StrCpy(char * str1, const char * str2);

@@ -1,9 +1,0 @@
-<map id="Hedder.h" name="Hedder.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="89,5,168,33"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,81,71,109"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,36,68,73,64,69,111,31"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="95,81,162,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="131,34,131,65,126,65,126,34"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="186,81,255,109"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="147,31,194,69,191,73,143,36"/>
-</map>
