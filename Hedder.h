@@ -14,4 +14,5 @@ char *       StrTok(const char * str, const char tok);
 int          max(int a, int b);
 int          min(int a, int b);
 int          GetLine(char ** lineptr, FILE * stream);
+bool         ComparisonStr(const char * str1, const char * str2);
 

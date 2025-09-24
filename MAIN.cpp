@@ -26,7 +26,6 @@ void    TextSortNReg(char *** text);
 void    TextEraseChars(char *** text, const char * chars);
 void    SwapStr(char *** text, int n1, int n2);
 int     comp(const void * a, const void * b);
-bool    ComparisonStr(const char * str1, const char * str2);
 FLAGS   FindInFlagBase(int argc, const char * argv[],FILE ** file);
 void    PrintHelp(void);
 void    DefaultSort(char *** Text);
@@ -56,8 +55,10 @@ int main(int argc, const char * argv[]){
         return 0;
     }
 
+    char * buff = NULL;  /* Pavel is cooked */
+    char ** Text = ReadText2(file, &buff);
     MyAssert(file == NULL);
-    char ** Text = ReadText(file);
+    printf("%d", mode);
 
     switch(mode){
     case MODE_ByEnd:
@@ -80,25 +81,22 @@ int main(int argc, const char * argv[]){
     }
 
     PrintText(Text);
+
     fclose(file);
+    free(buff);
+    free(Text);
 
     return 0;
 
 }
 void Qsort(char *** Text){
-    qsort(Text, 6640, sizeof(char*), comp);
+    MyAssert(*Text == NULL);
+    qsort(Text, 6641, sizeof(char*), comp);
 
-    for(int i = 0; Text[i] != NULL; i++){
-        free(Text[i]);
-    }
-    free(Text);
+
 }
 void DefaultSort(char *** Text){
     TextSort(Text);
-
-    for(int i = 0; Text[i] != NULL; i++){
-        free(Text[i]);
-    }
     free(Text);
 }
 
@@ -271,16 +269,18 @@ void SwapStr(char *** text, int n1, int n2){
 
 char ** ReadText2(FILE * fin, char ** a){
     MyAssert(fin == NULL);
-    MyAssert(a == NULL);
 
     fseek(fin, 0, SEEK_END);
     size_t n = (long unsigned int)ftell(fin);
+    MyAssert(a == NULL);
     *a = (char*)calloc(n+1, sizeof(char));
+
     fseek(fin, 0, SEEK_SET);
     fread(*a, sizeof(char), n, fin);
     (*a)[n] = '\0';
     int i = 0;
     int sum = 1;
+    fseek(fin, 0, SEEK_SET);
     while((*a)[i] != '\0'){
         if((*a)[i] == '\n'){
             //printf("%d \\n %d\n", i, sum);
@@ -302,11 +302,15 @@ char ** ReadText2(FILE * fin, char ** a){
             i++;
         }
     }
-    ptr[sum] = NULL;
+    ptr[6641] = NULL;     //////////////////////////////////////////////////////////////////////////////////////////////////
     return ptr;
 }
 
 int comp(const void * a, const void * b) {
+    MyAssert((const char*)*(const char**)b == NULL);
+    MyAssert((const char*)*(const char**)a == NULL);
+    MyAssert((const char*)b == NULL);
+    MyAssert((const char*)a == NULL);
     return strcmp(*(const char**)a, *(const char**)b);
 }
 
@@ -342,25 +346,13 @@ FLAGS FindInFlagBase(int argc, const char * argv[], FILE ** file) {
     return MODE_Default;
 }
 
-bool ComparisonStr(const char * str1, const char * str2) {
-    MyAssert(str1 == NULL);
-    MyAssert(str2 == NULL);
-
-    int j = 0;
-    while((str1[j] != '\0') || (str2[j] != '\0')) {
-        if (str1[j] != str2[j]) {
-            return false;
-        }
-        j++;
-    }
-
-    return true;
-}
-
 void PrintHelp(void) {
     printf("flags :\n");
-    printf("-t                  : starts unit tests\n");
-    printf("-f <name of file>   : solve tests from file\n");
+    printf("-D <name of file>   : sort text from file\n");
+    printf("-NG <name of file>   : sort text from file without register\n");
+    printf("-BE <name of file>   : sort text from file By End\n");
+    printf("-QS <name of file>   : quick sort\n");
     printf("--help              : print information about flags\n");
-    printf("--kitten              : printit koshku poltorashku\n");
+    printf("--kitten             : printit koshku poltorashku\n");
 }
+

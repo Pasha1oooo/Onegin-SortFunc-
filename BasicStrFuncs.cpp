@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include "Hedder.h"
+#include "MyAssert.h"
 
 int StrCmp(char * str1,char * str2) {
     int j = 0;
@@ -165,3 +166,19 @@ int min(int a, int b){
         return b;
     }
 }
+
+bool ComparisonStr(const char * str1, const char * str2) {
+    MyAssert(str1 == NULL);
+    MyAssert(str2 == NULL);
+
+    int j = 0;
+    while((str1[j] != '\0') || (str2[j] != '\0')) {
+        if (str1[j] != str2[j]) {
+            return false;
+        }
+        j++;
+    }
+
+    return true;
+}
+
