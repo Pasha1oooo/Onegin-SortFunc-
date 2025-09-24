@@ -58,7 +58,6 @@ int main(int argc, const char * argv[]){
     char * buff = NULL;  /* Pavel is cooked */
     char ** Text = ReadText2(file, &buff);
     MyAssert(file == NULL);
-    printf("%d", mode);
 
     switch(mode){
     case MODE_ByEnd:
@@ -80,20 +79,18 @@ int main(int argc, const char * argv[]){
         break;
     }
 
-    PrintText(Text);
+    PrintText(Text);    ///////???????///////???????///////???????
 
     fclose(file);
-    free(buff);
-    free(Text);
 
+    free(Text);
+    free(buff);
     return 0;
 
 }
 void Qsort(char *** Text){
     MyAssert(*Text == NULL);
-    qsort(Text, 6641, sizeof(char*), comp);
-
-
+    qsort(*Text, 6640, sizeof(char*), comp);
 }
 void DefaultSort(char *** Text){
     TextSort(Text);
@@ -104,7 +101,7 @@ void SortByEnd(char *** Text){
 
     TextISort(Text);
 
-    for(int i = 0; Text[i] != NULL; i++){
+    for(int i = 0; Text[i] != NULL; i++){   ///////???????///////???????///////???????
         free(Text[i]);
     }
     free(Text);
@@ -302,16 +299,13 @@ char ** ReadText2(FILE * fin, char ** a){
             i++;
         }
     }
-    ptr[6641] = NULL;     //////////////////////////////////////////////////////////////////////////////////////////////////
+    ptr[6640] = NULL;     //////////////////////////////////////////////////////////////////////////////////////////////////
     return ptr;
 }
 
 int comp(const void * a, const void * b) {
-    MyAssert((const char*)*(const char**)b == NULL);
-    MyAssert((const char*)*(const char**)a == NULL);
-    MyAssert((const char*)b == NULL);
-    MyAssert((const char*)a == NULL);
-    return strcmp(*(const char**)a, *(const char**)b);
+    //printf("new\n");
+    return strcmp(*(const char **)a, *(const char **)b);
 }
 
 
