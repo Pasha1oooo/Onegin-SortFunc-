@@ -94,7 +94,7 @@ void Qsort(char *** Text){
 }
 void DefaultSort(char *** Text){
     TextSort(Text);
-    free(Text);
+
 }
 
 void SortByEnd(char *** Text){
@@ -158,7 +158,7 @@ void TextSort(char *** text){
         for(int j = 0; j < k; j++){
             for(int n = 0; n < min(StrLen((*text)[j]), StrLen((*text)[j + 1])); n++)
             {
-                if(*(*(*(text) + j)+n) - *(*(*(text) + j+1)+n) > 0){
+                if(StrCmp2(*(*(text) + j), *(*(text) + j + 1)) > 0){
                     SwapStr(text, j, j + 1);
                     n = min(StrLen((*text)[j]), StrLen((*text)[j + 1]));
                 }
@@ -211,11 +211,11 @@ void TextSortNReg(char *** text){
                 a = *(*(*(text) + j)+n);
                 b = *(*(*(text) + j+1)+n);
                 if(a >= 'a'){
-                    printf("Meow\n");
+                    //printf("Meow\n");
                     a = a + 'A' - 'a';
                 }
                 if(b >= 'a'){
-                    printf("Meow\n");
+                    //printf("Meow\n");
                     b = b + 'A' - 'a';
                 }
                 if(a - b > 0){

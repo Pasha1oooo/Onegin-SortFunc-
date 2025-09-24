@@ -25,6 +25,17 @@ int StrCmp(char * str1,char * str2) {
     }
 }
 
+int StrCmp2(char * str1,char * str2) {
+    int j = 0;
+    while((str1[j] != '\0') || (str2[j] != '\0')) {
+        if (str1[j] != str2[j]) {
+            return ((int)str1[j] - (int)str2[j]);
+        }
+        j++;
+    }
+    return ((int)str1[j-1] - (int)str2[j-1]);
+}
+
 
 int StrLen(const char * str){
     int j = 0;
@@ -102,13 +113,13 @@ int GetLine(char ** lineptr, FILE * stream){
     int    i = 0;
 
     char * ptr = (char*)calloc(n, sizeof(char));
-    *(ptr + n-1) = '\0';
+
     char c = (char)getc(stream);
     while(c != '\n' && c != EOF){
         if((size_t)i == n-1){
             n = n * 2;
             ptr = (char*)realloc(ptr,n);
-            *(ptr + n-1) = '\0';
+
         }
         *(ptr + i) = c;
         c = (char)getc(stream);
